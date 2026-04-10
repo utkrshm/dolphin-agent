@@ -1,0 +1,15 @@
+[project]
+name = "mem0-intern-assignment"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain[groq,ollama]>=1.2.15",
+    "langgraph>=1.1.6",
+    "pydantic>=2.12.5",
+    "rich>=14.3.3",
+    "textual>=8.2.3",
+    "textual-dev>=1.8.0",
+    "whisper>=1.1.10",
+]
