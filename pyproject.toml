@@ -1,3 +1,10 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["stt*", "agent*", "tools*", "memory*", "config*"]
+
 [project]
 name = "mem0-intern-assignment"
 version = "0.1.0"
@@ -7,9 +14,12 @@ requires-python = ">=3.12"
 dependencies = [
     "langchain[groq,ollama]>=1.2.15",
     "langgraph>=1.1.6",
+    "openai-whisper>=20250625",
     "pydantic>=2.12.5",
+    "python-dotenv>=1.2.2",
     "rich>=14.3.3",
+    "scipy>=1.17.1",
+    "sounddevice>=0.5.5",
     "textual>=8.2.3",
     "textual-dev>=1.8.0",
-    "whisper>=1.1.10",
 ]
