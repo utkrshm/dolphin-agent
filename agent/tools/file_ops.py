@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Literal
 
-OUTPUT_DIRECTORY = Path(__file__).parent.parent / "outputs"
+# Point to outputs in the root directory
+OUTPUT_DIRECTORY = Path(__file__).parent.parent.parent / "outputs"
 
 def _check_location(path: Path):
     resolved_path = (OUTPUT_DIRECTORY / path).resolve()
@@ -31,12 +32,14 @@ def read_file(file_name: str):
 
 
 # @tool
-def write_to_file(file_name: str, content: str, mode=Literal['write', 'append']):
+def write_to_file(file_name: str, content: str, mode: Literal['write', 'append']):
     path = _check_location(Path(file_name))
     OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
     
     file_mode = "a" if mode == "append" else "w"
-    path.open(mode=file_mode, encoding="utf-8").write(content)
+    
+    with path.open(mode=file_mode, encoding="utf-8") as f: 
+        f.write(content)
     
     action = "Appended to" if mode == "append" else "Written to"
     return f"{action} '{file_name}' successfully - ({len(content)} characters)."

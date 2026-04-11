@@ -20,12 +20,18 @@ def summarize_file(file_name: str) -> str:
     if file_content.startswith("Error:"):
         return file_content
 
-    response = ollama.chat(
-        model=model,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": f"Summarize the following:\n\n{file_content}"}
-        ]
-    )
+    try:
+        response = ollama.chat(
+            model=model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": f"Summarize the following:\n\n{file_content}"}
+            ]
+        )
 
-    return response["message"]["content"]
+        return response["message"]["content"]
+    except ollama.ResponseError as e:
+        if e.status_code == 404:
+            raise Exception("Cannot load Ollama service or model. Please check if that service is running and try again")
+        else:
+            raise Exception(f"Ollama error: {e.error}")
