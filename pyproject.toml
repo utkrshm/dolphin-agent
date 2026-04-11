@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["stt*", "agent*", "tools*", "memory*", "config*"]
+include = ["stt*", "agent*", "memory*", "config*"]
 
 [project]
 name = "mem0-intern-assignment"
