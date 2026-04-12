@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 include = ["stt*", "agent*", "memory*", "config*"]
 
 [project]
-name = "voice-controlled-ai-agent"
+name = "dolphin-agent"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

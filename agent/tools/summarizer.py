@@ -12,8 +12,20 @@ Your summary must:
 - Never add information that isn't in the original
 - Use plain, direct language"""
 
-# @tool
 def summarize_file(file_name: str) -> str:
+    """Summarize a file from outputs using the configured Ollama model.
+
+    Args:
+        file_name: Relative path of the file inside the outputs directory.
+
+    Returns:
+        A summary string, or an error string when the file cannot be read.
+
+    Raises:
+        Exception: If Ollama is unavailable, the model is missing, or another
+            Ollama response error occurs.
+    """
+
     model = os.getenv("SUMMARY_MODEL", "gemma3:1b")
 
     file_content = read_file(file_name)

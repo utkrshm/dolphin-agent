@@ -12,8 +12,17 @@ def _check_location(path: Path):
     return resolved_path
 
 
-# @tool
 def read_file(file_name: str):
+    """Read a file from the outputs directory and return its contents.
+
+    Args:
+        file_name: Relative path of the file inside the outputs directory.
+
+    Returns:
+        The file contents as a UTF-8 string, or an error string if the file
+        does not exist.
+    """
+    
     path = _check_location(Path(file_name))
     
     if not path.exists():
@@ -31,8 +40,21 @@ def read_file(file_name: str):
         return path.read_text(encoding="utf-8")
 
 
-# @tool
 def write_to_file(file_name: str, content: str, mode: Literal['write', 'append']):
+    """Write or append text content to a file in the outputs directory.
+
+    Args:
+        file_name: Relative path of the target file inside the outputs directory.
+        content: Text content to write.
+        mode: Either "write" to overwrite or "append" to add to the file.
+
+    Returns:
+        A status string describing what action was performed.
+
+    Notes:
+        Access is restricted to the outputs directory.
+    """
+    
     path = _check_location(Path(file_name))
     OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
     
