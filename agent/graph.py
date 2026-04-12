@@ -2,6 +2,7 @@ import os
 from functools import partial
 from dotenv import load_dotenv
 
+from mem0 import MemoryClient
 from langgraph.graph import START, END, StateGraph
 from langgraph.checkpoint.memory import MemorySaver
 
@@ -40,6 +41,17 @@ def load_model():
     )
 
 
+def load_memory():
+    if not os.getenv("MEM0_API_KEY"):
+        raise RuntimeError(
+            "No Memory API given, please provide the Mem0 API key by setting the `MEM0_API_KEY` environment variable."
+        )
+
+    return MemoryClient(
+        org_id=os.getenv("MEM0_ORG_ID", ""),
+        project_id=os.getenv("MEM0_PROJECT_ID", "")
+    )
+
 def should_continue(state: AgentState) -> str:
     last_message = state["messages"][-1]
     if hasattr(last_message, "tool_calls") and last_message.tool_calls:
@@ -49,8 +61,9 @@ def should_continue(state: AgentState) -> str:
 
 model = load_model()
 tools_by_name = {tool.name: tool for tool in tools}
+memory = load_memory()
 
-_agent_node = partial(agent_node, model=model)
+_agent_node = partial(agent_node, model=model, memory_client=memory)
 _tool_node = partial(tool_node, tools_by_name=tools_by_name)
 
 graph = (
