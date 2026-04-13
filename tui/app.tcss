@@ -1,10 +1,59 @@
-InputBar {
-    dock: bottom;
-    padding: 1 2;
-    # background: grey;
-    border: solid #ffa600
+Screen {
+    layers: base overlay;
 }
 
-Placeholder {
+#chat-container {
+    height: 1fr;
+    padding: 1 2;
+}
+
+InputBar {
+    dock: bottom;
     height: auto;
+    min-height: 5;
+    padding: 1 2;
+    border-top: solid #ffa600;
+}
+
+#hint-label {
+    color: grey;
+    margin-bottom: 1;
+}
+
+TurnWidget {
+    margin-bottom: 1;
+    padding: 1;
+    border: solid #333;
+}
+
+.user-message {
+    color: #ffa600;
+    margin-bottom: 1;
+}
+
+#response-log {
+    height: auto;
+    max-height: 20;
+}
+
+#trace-log {
+    height: auto;
+    max-height: 10;
+}
+
+HITLBar {
+    height: auto;
+    padding: 1;
+}
+
+#hitl-label {
+    width: 1fr;
+}
+
+Input.error {
+    border: solid red;
+}
+
+Button {
+    margin-left: 1;
 }
