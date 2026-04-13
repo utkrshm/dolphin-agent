@@ -2,6 +2,7 @@ __pycache__/
 .venv/
 .env
 outputs/**
+test.py/
 
 # Build files for this project
 **.egg-info/

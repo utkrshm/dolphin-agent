@@ -50,6 +50,7 @@ if __name__ == "__main__":
 
     # stream_agent("Write a short poem about the ocean to a file called ocean.txt", mem0_user_id=mem0_user_id)
     stream_agent("Summarize the file ocean.txt", mem0_user_id=mem0_user_id)
+    stream_agent("Write the code for bubble_sort in bubble_sort.py", mem0_user_id=mem0_user_id)
     
     stream_agent("On which file did we just work?", mem0_user_id=mem0_user_id)
     

@@ -1,0 +1,10 @@
+InputBar {
+    dock: bottom;
+    padding: 1 2;
+    # background: grey;
+    border: solid #ffa600
+}
+
+Placeholder {
+    height: auto;
+}
