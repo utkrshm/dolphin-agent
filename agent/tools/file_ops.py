@@ -12,6 +12,26 @@ def _check_location(path: Path):
     return resolved_path
 
 
+def _read_pdf(path: Path) -> str:
+    try:
+        import PyPDF2
+        reader = PyPDF2.PdfReader(path)
+        pages = [page.extract_text() or "" for page in reader.pages]
+        return "\n\n".join(pages).strip()
+    except ImportError:
+        return "Error: pypdf is not installed. Run 'uv add pypdf'."
+
+
+def _read_docx(path: Path) -> str:
+    try:
+        import docx
+        doc = docx.Document(str(path))
+        paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+        return "\n\n".join(paragraphs).strip()
+    except ImportError:
+        return "Error: python-docx is not installed. Run 'uv add python-docx'."
+
+
 def read_file(file_name: str):
     """Read a file from the outputs directory and return its contents.
 
@@ -31,11 +51,9 @@ def read_file(file_name: str):
     ext = path.suffix.lower()
     
     if ext == ".pdf":
-        # TODO: Implement this function, using PyPDF
-        raise NotImplementedError
+        _read_pdf(path)
     elif ext == ".docx":
-        # TODO: Implement this using python-docx
-        raise NotImplementedError
+        _read_docx(path)
     else:
         return path.read_text(encoding="utf-8")
 
